@@ -3,13 +3,13 @@ const cors = require('cors');
 
 const app = express();
 
-require('./startup/db')();
+require('./start/db')();
 
 app.use(cors({
     origin: '*'
 }));
 
-require('./startup/routes')(app);
+require('./start/routes')(app);
 
 const port = 8080;
 
