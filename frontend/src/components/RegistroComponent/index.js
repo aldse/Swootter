@@ -3,6 +3,7 @@ import { Button, Card, Form } from "react-bootstrap";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
+import {SECRET} from "../../env";
 import CryptoJS from "crypto-js";
 
 export default function RegistroComponent() {
@@ -20,19 +21,16 @@ export default function RegistroComponent() {
     if (!formValid()) return;
 
     const json = {
-      nome,
-      nomeusuario,
-      email,
-      senha,
-      confirmesenha,
-      datanasc,
+      name: nome,
+      birthdate: datanasc,
+      username: nomeusuario,
+      email: email,
+      password: senha,
+      confirmpassword: confirmesenha
     };
-    const jsonCrypt = CryptoJS.AES.encrypt(
-      JSON.stringify(json),
-    //   SECRET
-    ).toString();
+    const jsonCrypt = CryptoJS.AES.encrypt( JSON.stringify(json), SECRET).toString();
     try {
-      var res = await axios.post("http://localhost:8080/api/author/", {
+      var res = await axios.post("http://localhost:8080/user/register/", {
         jsonCrypt,
       });
 
@@ -62,18 +60,18 @@ export default function RegistroComponent() {
       setVariant("danger");
       return false;
     }
-    if (!nomeusuario.includes(" ")) {
-      setMessage("Insira um nome de usuário");
-      setShow(true);
-      setVariant("danger");
-      return false;
-    }
-    if (nomeusuario.length < 3) {
-      setMessage("Insira um nome de usuário válido");
-      setShow(true);
-      setVariant("danger");
-      return false;
-    }
+    // if (!nomeusuario.includes(" ")) {
+    //   setMessage("Insira um nome de usuário");
+    //   setShow(true);
+    //   setVariant("danger");
+    //   return false;
+    // }
+    // if (nomeusuario.length < 3) {
+    //   setMessage("Insira um nome de usuário válido");
+    //   setShow(true);
+    //   setVariant("danger");
+    //   return false;
+    // }
     if (!email.includes("@")) {
       setMessage("Insira um e-mail válidos");
       setShow(true);

@@ -11,9 +11,9 @@ function Decrypt(text) {
 
 class SwootController {
     static async Swoot(req, res) {
-        // var decrypted = Decrypt(req.body.jsonCrypt);
-        // const json = JSON.parse(decrypted);
-        const json = req.body;
+        var decrypted = Decrypt(req.body.jsonCrypt);
+        const json = JSON.parse(decrypted);
+        // const json = req.body;
 
         const { token, text, isAnswer } = json;
         const userid = jwt.decode(token).userid;
