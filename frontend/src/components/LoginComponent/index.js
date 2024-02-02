@@ -4,8 +4,9 @@ import axios from "axios";
 import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
 import CryptoJS from "crypto-js";
+import { Link } from "react-router-dom";
 
-export default function RegistroComponent() {
+export default function LoginComponent() {
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);
 
   var [nome, setNome] = useState("");
@@ -28,8 +29,8 @@ export default function RegistroComponent() {
       datanasc,
     };
     const jsonCrypt = CryptoJS.AES.encrypt(
-      JSON.stringify(json),
-    //   SECRET
+      JSON.stringify(json)
+      //   SECRET
     ).toString();
     try {
       var res = await axios.post("http://localhost:8080/api/author/", {
@@ -105,51 +106,31 @@ export default function RegistroComponent() {
   return (
     <Card className={styles.card}>
       <Card.Header className={styles.card__header}>
-        <Card.Title className={styles.reg}>Registrar-se</Card.Title>
+        <Card.Title className={styles.reg}>Swootter</Card.Title>
       </Card.Header>
       <Card.Body>
         <Form className={styles.card__form} onSubmit={handleSubmit}>
-          <Form.Label>Insira seu nome</Form.Label>
+          {/* <Form.Label>Insira seu e-mail ou user</Form.Label> */}
           <Form.Control
-            placeholder="Digite seu nome completo"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-          <Form.Label>Insira seu nome de usuário</Form.Label>
-          <Form.Control
-            placeholder="Digite seu user"
-            value={nomeusuario}
-            onChange={(e) => setNomeusuario(e.target.value)}
-          />
-          <Form.Label>Insira seu e-mail</Form.Label>
-          <Form.Control
-            placeholder="Digite seu e-mail"
+            placeholder="Digite seu e-mail ou nome de usuário"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Form.Label>Insira sua senha</Form.Label>
+          {/* <Form.Label>Insira sua senha</Form.Label> */}
           <Form.Control
             type="password"
             value={senha}
-            placeholder="Digite sua senha"
             onChange={(e) => setSenha(e.target.value)}
+            placeholder="Digite sua senha"
           />
-          <Form.Label>Confirme sua senha</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Digite sua senha novamente"
-            value={confirmesenha}
-            onChange={(e) => setConfirmeSenha(e.target.value)}
-          />
-          <Form.Label>Insira sua data de nascimento</Form.Label>
-          <Form.Control
-            type="date"
-            value={datanasc}
-            onChange={(e) => setDataNasc(e.target.value)}
-          />
-
-          <Button className={styles.card__form__button} type="submit">
-            Entrar
+          <Button
+            className={`glow-on-hover`}
+            type="submit"
+            style={{ width: "200px", height: "50px", border: "none", backgroundColor: "#4D9FFD" }} // Ajuste o tamanho conforme necessário
+          >
+            <Link to="/" className={styles.link}>
+              Entrar
+            </Link>
           </Button>
         </Form>
       </Card.Body>
