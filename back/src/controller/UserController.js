@@ -3,19 +3,23 @@ const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+function Decrypt(text) {
+    var decrypted = CryptoJS.AES.decrypt(text, process.env.SECRET).toString(CryptoJS.enc.Utf8);
+    return decrypted;
+}
+
 class UserController {
     static async Register(req, res) {
-        // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-        // const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-
+        // var decrypted = Decrypt(req.body.jsonCrypt);
         // const json = JSON.parse(decrypted);
+
         const json = req.body;
         const { 
             name, birthdate, username,
             email, password, confirmpassword 
         } = json;
 
-        const findUser = await UserModel.findOne({ username: username });
+        const findByUsernameOrEmail = await UserModel.findOne({ $or: [{ username: username }, { email: email }]});
 
         var response;
         Object.entries(json).forEach(entry => {
@@ -30,9 +34,8 @@ class UserController {
 
         if (password != confirmpassword)
             return res.status(400).json({ message: "Passwords don't match."});
-
-        if (findUser)
-            return res.status(422).json({ message: 'Someone is already using this username!'});
+        if (findByUsernameOrEmail)
+            return res.status(422).json({ message: 'Username or email is already being used!'});
 
         const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.SECRET).toString();
 
@@ -56,19 +59,15 @@ class UserController {
     }
 
     static async Login(req, res) {
-        // var bytes = CryptoJS.AES.decrypt(req.body.jsonCrypt, process.env.SECRET);
-        // const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-
+        // var decrypted = Decrypt(req.body.jsonCrypt);
         // const json = JSON.parse(decrypted);
+
         const json = req.body;
         const { 
             value, password 
         } = json;
-        const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.SECRET).toString();
 
-        const findByUsername = await UserModel.findOne({ username: value });
-        const findByEmail = await UserModel.findOne({ email: value });
-        const findByPassword = await UserModel.findOne({ password: encryptedPassword });
+        const findByUsernameOrEmail = await UserModel.findOne({ $or: [{ username: value }, { email: value }]});
         
         var response;
         Object.entries(json).forEach(entry => {
@@ -81,16 +80,18 @@ class UserController {
         if (response)
             return res.status(400).json({ message: response });
 
-        if (!findByUsername && !findByEmail)
+        if (!findByUsernameOrEmail)
             return res.status(422).json({ message: 'Invalid username or email!'});
-        if (!findByPassword)
-            return res.status(422).json({ message: 'Invalid password!'});
 
+        var decrypted = Decrypt(findByUsernameOrEmail.password);
+        if (decrypted != password)
+            return res.status(422).json({ message: 'Invalid password!'});
+        
         try {
             const secret = process.env.SECRET;
             const token = jwt.sign(
                 {
-                    userid: findByUsername._id
+                    userid: findByUsernameOrEmail._id
                 },
                 secret,
                 {
@@ -100,6 +101,33 @@ class UserController {
             res.status(200).send({ token: token });
         } catch (error) {
             return res.status(500).send({ message: 'Something failed when trying to register the user', data: error.message});
+        }
+    }
+
+    static async DeleteByJwt(req, res) {
+        // var decrypted = Decrypt(req.body.jsonCrypt);
+        // const json = JSON.parse(decrypted);
+        const json = req.body;
+
+        const { token } = json;
+        const userid = jwt.decode(token).userid;
+
+        try {
+            await UserModel.deleteOne({ _id: userid });
+            res.status(200).send({ message: 'User deleted with success.' });
+        } catch (error) {
+            return res.status(500).send({ message: 'Something failed when trying to delete the user', data: error.message});
+        }
+    }
+
+    static async DeleteById(req, res) {
+        const userid = req.params.id;
+
+        try {
+            await UserModel.deleteOne({ _id: userid });
+            res.status(200).send({ message: 'User deleted with success.' });
+        } catch (error) {
+            return res.status(500).send({ message: 'Something failed when trying to delete the user', data: error.message});
         }
     }
 }

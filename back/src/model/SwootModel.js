@@ -11,7 +11,7 @@ const SwootSchema = new mongoose.Schema({
         required: true
     },
     isAnswer: {
-        type: this.SwootSchema,
+        type: String,
         required: false
     },
     createdAt: {
