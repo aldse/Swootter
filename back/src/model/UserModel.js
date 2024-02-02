@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    img: {
+        type: String,
+        required: false
+    },
     createdAt: {
         type: Date,
         required: true
@@ -32,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     removedAt: {
         type: Date,
         required: false
-    },
+    }
 });
 
 const UserModel = mongoose.model('User', UserSchema);

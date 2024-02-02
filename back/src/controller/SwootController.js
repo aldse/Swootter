@@ -11,9 +11,9 @@ function Decrypt(text) {
 
 class SwootController {
     static async Swoot(req, res) {
-        // var decrypted = Decrypt(req.body.jsonCrypt);
-        // const json = JSON.parse(decrypted);
-        const json = req.body;
+        var decrypted = Decrypt(req.body.jsonCrypt);
+        const json = JSON.parse(decrypted);
+        // const json = req.body;
 
         const { token, text, isAnswer } = json;
         const userid = jwt.decode(token).userid;
@@ -34,6 +34,21 @@ class SwootController {
             return res.status(200).send({ message: 'You swoot with success!'});
         } catch (error) {
             return res.status(500).send({ message: 'Something failed when trying to make the swoot', data: error.message});
+        }
+    }
+
+    static async Delete(req, res) {
+        var decrypted = Decrypt(req.body.jsonCrypt);
+        const json = JSON.parse(decrypted);
+        // const json = req.body;
+
+        const { swootid } = json;
+
+        try {
+            await SwootModel.deleteOne({ _id: swootid });
+            res.status(200).send({ message: 'Swoot deleted with success.' });
+        } catch (error) {
+            return res.status(500).send({ message: 'Something failed when trying to delete the swoot', data: error.message});
         }
     }
 }

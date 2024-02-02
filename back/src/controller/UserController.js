@@ -10,10 +10,10 @@ function Decrypt(text) {
 
 class UserController {
     static async Register(req, res) {
-        // var decrypted = Decrypt(req.body.jsonCrypt);
-        // const json = JSON.parse(decrypted);
+        var decrypted = Decrypt(req.body.jsonCrypt);
+        const json = JSON.parse(decrypted);
+        // const json = req.body;
 
-        const json = req.body;
         const { 
             name, birthdate, username,
             email, password, confirmpassword 
@@ -45,6 +45,7 @@ class UserController {
             username: username,
             email: email,
             password: encryptedPassword,
+            img: null,
             createdAt: Date.now(),
             updatedAt: Date.now(),
             removedAt: null
@@ -59,10 +60,10 @@ class UserController {
     }
 
     static async Login(req, res) {
-        // var decrypted = Decrypt(req.body.jsonCrypt);
-        // const json = JSON.parse(decrypted);
+        var decrypted = Decrypt(req.body.jsonCrypt);
+        const json = JSON.parse(decrypted);
+        // const json = req.body;
 
-        const json = req.body;
         const { 
             value, password 
         } = json;
@@ -105,9 +106,9 @@ class UserController {
     }
 
     static async DeleteByJwt(req, res) {
-        // var decrypted = Decrypt(req.body.jsonCrypt);
-        // const json = JSON.parse(decrypted);
-        const json = req.body;
+        var decrypted = Decrypt(req.body.jsonCrypt);
+        const json = JSON.parse(decrypted);
+        // const json = req.body;
 
         const { token } = json;
         const userid = jwt.decode(token).userid;
