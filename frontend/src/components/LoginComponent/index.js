@@ -41,20 +41,13 @@ export default function LoginComponent() {
   }
 
   function formValid() {
-    // if (!nomeusuario.includes(" ")) {
-    //   setMessage("Insira um nome de usuário");
-    //   setShow(true);
-    //   setVariant("danger");
-    //   return false;
-    // }
-    if (valor.length < 3) {
-      setMessage("Insira um nome de usuário OU e-mail válido");
+    if (valor.length < 5) {
+      setMessage("E-mail ou nome de usuário inválido");
       setShow(true);
       setVariant("danger");
       return false;
     }
-    
-    if (valor.length < 6) {
+    if (senha.length < 6) {
       setMessage("Senha inferior a 6 caracteres");
       setShow(true);
       setVariant("danger");
@@ -67,38 +60,32 @@ export default function LoginComponent() {
   return (
     <Card className={styles.card}>
       <Card.Header className={styles.card__header}>
-        <Card.Title className={styles.reg}>Swootter</Card.Title>
+        <Card.Title className={styles.reg}>Login</Card.Title>
       </Card.Header>
       <Card.Body>
         <Form className={styles.card__form} onSubmit={handleSubmit}>
-          {/* <Form.Label>Insira seu e-mail ou user</Form.Label> */}
-          <Form.Control
-            placeholder="Digite seu e-mail ou nome de usuário"
-            value={valor}
-            onChange={(e) => setValor(e.target.value)}
-          />
-
-          {/* <Form.Label>Insira sua senha</Form.Label> */}
-          <Form.Control
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            placeholder="Digite sua senha"
-          />
-
-          <Button
-            className={`glow-on-hover`}
-            type="submit"
-            style={{
-              width: "200px",
-              height: "50px",
-              border: "none",
-              backgroundColor: "#4D9FFD",
-            }} 
-          >
-              Entrar
-          </Button>
-
+          <div>
+            <Form.Label>E-mail ou nome de usuário</Form.Label>
+            <Form.Control
+              placeholder="Digite seu e-mail ou nome de usuário"
+              value={valor}
+              onChange={(e) => setValor(e.target.value)}
+              className={styles.form__input}
+            />
+          </div>
+          <div>
+            <Form.Label>Senha</Form.Label>
+            <Form.Control
+              placeholder="Digite sua senha"
+              value={senha}
+              type="password"
+              onChange={(e) => setSenha(e.target.value)}
+              className={styles.form__input}
+            />
+          </div>
+          <button className={styles.form__button} type="submit">
+            Entrar
+          </button>
         </Form>
       </Card.Body>
     </Card>

@@ -13,7 +13,6 @@ class UserController {
         var decrypted = Decrypt(req.body.jsonCrypt);
         const json = JSON.parse(decrypted);
         // const json = req.body;
-        
         const { 
             name, birthdate, username,
             email, password, confirmpassword 
@@ -45,6 +44,7 @@ class UserController {
             username: username,
             email: email,
             password: encryptedPassword,
+            img: null,
             createdAt: Date.now(),
             updatedAt: Date.now(),
             removedAt: null
@@ -98,7 +98,7 @@ class UserController {
                     expiresIn: '1 day'
                 }
             );
-            res.status(200).send({ token: token });
+            res.status(200).send({ message: "User logged in with success.", token: token });
         } catch (error) {
             return res.status(500).send({ message: 'Something failed when trying to register the user', data: error.message});
         }

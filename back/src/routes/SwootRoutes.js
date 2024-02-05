@@ -4,5 +4,6 @@ const route = express.Router();
 
 route
     .post('/', SwootController.Swoot)
+    .post('/delete', SwootController.Delete)
 
 module.exports = route;
