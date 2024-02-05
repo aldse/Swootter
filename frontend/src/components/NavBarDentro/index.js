@@ -1,7 +1,8 @@
 import logo from "./img/loguinhologo.png";
 import home from "./img/casinha.png";
 import chama from "./img/hot2.png";
-import perfil from "./img/perfil2.png";
+import perfil from "./img/perfil5.png";
+import add from "./img/btn1.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -38,8 +39,8 @@ function NavBarDentro() {
                   <Nav.Link to="/perfil" style={{ padding: "2%", color: "white" }}>
                   <img
                   src={perfil}
-                  width="58"
-                  height="57"
+                  width="60"
+                  height="60"
                   className="d-inline-block align-top"
                   alt="Logo"
                 />
@@ -56,6 +57,15 @@ function NavBarDentro() {
                   <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
                   <img
                   src={chama}
+                  width="60"
+                  height="60"
+                  className="d-inline-block align-top"
+                  alt="Logo"
+                />
+                  </Nav.Link>
+                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
+                  <img
+                  src={add}
                   width="60"
                   height="60"
                   className="d-inline-block align-top"

@@ -1,0 +1,57 @@
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.img {
+  position: relative;
+  max-width: 7%;
+  width: auto;
+}
+
+.imagem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.imagem p {
+  margin: 0;
+}
+
+.row {    
+  width: 100%;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.date{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+//vai
+.Containercre{
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: white;
+}
