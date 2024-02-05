@@ -16,7 +16,7 @@ function NavBarInicio() {
   return (
     <>
       {["md"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="bg-transparent mb-3">
+        <Navbar key={expand} expand={expand} className="bg-color mb-3">
           {" "}
           <Container fluid>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -30,7 +30,7 @@ function NavBarInicio() {
                 style={{ width: "115%" }}
               >
                 <NavLinkContainer>
-                  <Nav.Link to="/perfil" style={{ color: "white" }}>
+                  <Nav.Link to="/login" style={{ color: "white" }}>
                     <img
                       src={logo}
                       width="auto"
@@ -42,8 +42,12 @@ function NavBarInicio() {
                 </NavLinkContainer>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
-            <button class="glow-on-hover" type="button"><Link to="/login" className={styles.link}>Login</Link></button>
-            <button class="glow-on-hover" type="button"><Link to="/registro" className={styles.link}>Registro</Link></button>
+            <button className="nav-buttons" type="button">
+              <Link to="/login" className="buttons-text">Login</Link>
+            </button>
+            <button className="nav-buttons" type="button">
+              <Link to="/registro" className="buttons-text">Registro</Link>
+            </button>
           </Container>
         </Navbar>
       ))}

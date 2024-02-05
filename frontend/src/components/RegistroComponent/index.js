@@ -4,6 +4,7 @@ import axios from "axios";
 import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
 import CryptoJS from "crypto-js";
+import { SECRET } from "../../env";
 
 export default function RegistroComponent() {
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);
@@ -20,19 +21,19 @@ export default function RegistroComponent() {
     if (!formValid()) return;
 
     const json = {
-      nome,
-      nomeusuario,
-      email,
-      senha,
-      confirmesenha,
-      datanasc,
+      name: nome,
+      username: nomeusuario,
+      email: email,
+      password: senha,
+      confirmpassword: confirmesenha,
+      birthdate: datanasc,
     };
     const jsonCrypt = CryptoJS.AES.encrypt(
       JSON.stringify(json),
-    //   SECRET
+      SECRET
     ).toString();
     try {
-      var res = await axios.post("http://localhost:8080/api/author/", {
+      var res = await axios.post("http://localhost:8080/user/register", {
         jsonCrypt,
       });
 
@@ -50,32 +51,26 @@ export default function RegistroComponent() {
   }
 
   function formValid() {
-    if (!nome.includes(" ")) {
-      setMessage("Insira nome e sobrenome");
+    if (nome.length <= 5) {
+      setMessage("Seu nome deve possuir mais de 5 letras");
       setShow(true);
       setVariant("danger");
       return false;
     }
-    if (nome.length < 5) {
-      setMessage("Insira um nome e sobrenome válidos");
-      setShow(true);
-      setVariant("danger");
-      return false;
-    }
-    if (!nomeusuario.includes(" ")) {
-      setMessage("Insira um nome de usuário");
-      setShow(true);
-      setVariant("danger");
-      return false;
-    }
-    if (nomeusuario.length < 3) {
+    if (nomeusuario.includes(" ")) {
       setMessage("Insira um nome de usuário válido");
       setShow(true);
       setVariant("danger");
       return false;
     }
+    if (nomeusuario.length <= 3) {
+      setMessage("Seu nome de usuário deve possuir mais de 3 letras");
+      setShow(true);
+      setVariant("danger");
+      return false;
+    }
     if (!email.includes("@")) {
-      setMessage("Insira um e-mail válidos");
+      setMessage("Insira um e-mail válido");
       setShow(true);
       setVariant("danger");
       return false;
@@ -87,7 +82,7 @@ export default function RegistroComponent() {
       return false;
     }
     if (confirmesenha !== senha) {
-      setMessage("Senha incorreta, as senhas não são iguais");
+      setMessage("As senhas devem ser iguais");
       setShow(true);
       setVariant("danger");
       return false;
@@ -109,48 +104,72 @@ export default function RegistroComponent() {
       </Card.Header>
       <Card.Body>
         <Form className={styles.card__form} onSubmit={handleSubmit}>
-          <Form.Label>Insira seu nome</Form.Label>
-          <Form.Control
-            placeholder="Digite seu nome completo"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-          <Form.Label>Insira seu nome de usuário</Form.Label>
-          <Form.Control
-            placeholder="Digite seu user"
-            value={nomeusuario}
-            onChange={(e) => setNomeusuario(e.target.value)}
-          />
-          <Form.Label>Insira seu e-mail</Form.Label>
-          <Form.Control
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Form.Label>Insira sua senha</Form.Label>
-          <Form.Control
-            type="password"
-            value={senha}
-            placeholder="Digite sua senha"
-            onChange={(e) => setSenha(e.target.value)}
-          />
-          <Form.Label>Confirme sua senha</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Digite sua senha novamente"
-            value={confirmesenha}
-            onChange={(e) => setConfirmeSenha(e.target.value)}
-          />
-          <Form.Label>Insira sua data de nascimento</Form.Label>
-          <Form.Control
-            type="date"
-            value={datanasc}
-            onChange={(e) => setDataNasc(e.target.value)}
-          />
-
-          <Button className={styles.card__form__button} type="submit">
+          <div className={styles.form__transform}>
+            <div className={styles.form__topic}>
+              <div>
+                <Form.Label>Nome completo</Form.Label>
+                <Form.Control
+                  placeholder="Digite seu nome completo"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  className={styles.form__input}
+                />
+              </div>
+              <div>
+                <Form.Label>Nome de usuário</Form.Label>
+                <Form.Control
+                  placeholder="Digite seu nome de usuário"
+                  value={nomeusuario}
+                  onChange={(e) => setNomeusuario(e.target.value)}
+                  className={styles.form__input}
+                />
+              </div>
+              <div>
+                <Form.Label>Data de nascimento</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={datanasc}
+                  onChange={(e) => setDataNasc(e.target.value)}
+                  className={styles.form__input}
+                />
+              </div>
+            </div>
+            <div className={styles.form__topic}>
+              <div>
+                <Form.Label>E-mail</Form.Label>
+                <Form.Control
+                  placeholder="Digite seu e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={styles.form__input}
+                />
+              </div>
+              <div>
+                <Form.Label>Senha</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={senha}
+                  placeholder="Digite sua senha"
+                  onChange={(e) => setSenha(e.target.value)}
+                  className={styles.form__input}
+                />
+              </div>
+              <div>
+                <Form.Label>Confirme sua senha</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Digite sua senha novamente"
+                  value={confirmesenha}
+                  onChange={(e) => setConfirmeSenha(e.target.value)}
+                  className={styles.form__input}
+                />
+              </div>
+            </div>
+          </div>
+          
+          <button className={styles.form__button} type="submit">
             Entrar
-          </Button>
+          </button>
         </Form>
       </Card.Body>
     </Card>

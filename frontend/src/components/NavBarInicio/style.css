@@ -1,20 +1,46 @@
-
-.glow-on-hover {
-    width: 6%;
-    height: 40px;
-    margin: 0.1rem;
-    border: none;
-    outline: none;
-    color: #000;
-    background: #ffffff;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
-    text-decoration: none !important;
+.bg-color {
+    background-color: #2C2C2C;
 }
 
-.glow-on-hover:before {
+.nav-buttons {
+    border: 0;
+    margin: 20px;
+    width: 80px;
+    transition: 0.5s;
+    padding: 0 0 3px 0 !important;
+}
+
+.nav-buttons {
+    background:
+    linear-gradient(
+      to right,
+      #2C2C2C,
+      #2C2C2C
+    ),
+    linear-gradient(
+      to right,
+      #F263C0,
+      #B64BFD,
+      #7446E7
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+}
+
+.nav-buttons:hover {
+    background-size: 0 3px, 100% 3px;
+}
+
+.nav-buttons .buttons-text {
+    font-family: 'Jost', sans-serif;
+    font-size: larger;
+    text-decoration: none;
+    color: white;
+}
+
+/* .nav-buttons:before {
     content: '';
     background: linear-gradient(45deg, #FFFEFC, #FA76BF, #FC5AC7, #ED51D6, #AC49FE, #8547F2, #8958FF, #491F9D, #4A57E1, #4EB5EF, #5195F8,
     #4B9AF9, #4EA3FE, #5A94DE, #4E7DC2);
@@ -32,34 +58,31 @@
     border-radius: 10px;
 }
 
-.glow-on-hover:active {
+.nav-buttons:active {
     color: #ffffff
 }
 
-.glow-on-hover:active:after {
+.nav-buttons:active:after {
     background: transparent;
 }
 
-.glow-on-hover:hover:before {
+.nav-buttons:hover:before {
     opacity: 1;
 }
 
-.glow-on-hover:after {
+.nav-buttons:after {
     z-index: -1;
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #4D9FFD;
-    color: #000;
     left: 0;
     top: 0;
-    border-radius: 10%;
 }
 
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
-}
+} */
 
