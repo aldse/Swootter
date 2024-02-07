@@ -10,6 +10,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { LogoContainer, NavLinkContainer } from "./styled"; 
 import React from 'react';
 import ModalAddSweet from "../ModalAddSweet/index";
+import { NavLink } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function NavBarDentro() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -37,44 +39,60 @@ function NavBarDentro() {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
-              <Offcanvas.Body className="d-flex flex-column align-items-center" style={{ width: "90%" }}> 
+              <Offcanvas.Body
+                className="d-flex flex-column align-items-center"
+                style={{ width: "90%" }}
+              >
                 <NavLinkContainer>
-                  <Nav.Link to="/perfil" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={perfil}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
-                  </Nav.Link>
-                  <Nav.Link to="/" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={home}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
-                  </Nav.Link>
-                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={chama}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
-                  </Nav.Link>
-                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={add}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
-                  </Nav.Link>
+                  <Link
+                    to={`perfil/${sessionStorage.getItem('userId')}`}
+                    style={{ padding: "2%", color: "white" }}
+                  >
+                    <img
+                      src={perfil}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                    />
+                  </Link>
+                  <Link to="/feed" style={{ padding: "2%", color: "white" }}>
+                    <img
+                      src={home}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                    />
+                  </Link>
+                  <Link
+                    to="/tops"
+                    style={{ padding: "2%", color: "white" }}
+                  >
+                    <img
+                      src={chama}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                    />
+                  </Link>
+                  <Link
+                    style={{ padding: "2%", color: "white" }}
+                  >
+                    <img
+                      src={add}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                      onClick={() => setModalShow(true)}
+                    />
+                    <ModalAddSweet
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
+                  </Link>
                 </NavLinkContainer>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

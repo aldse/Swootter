@@ -25,7 +25,7 @@ function NavBarInicio() {
                 style={{ width: "115%" }}
               >
                 <NavLinkContainer>
-                  <Nav.Link to="/login" style={{ color: "white" }}>
+                  <Nav.Link to="/" style={{ color: "white" }}>
                     <img
                       src={logo}
                       width="auto"
@@ -38,7 +38,7 @@ function NavBarInicio() {
               </Offcanvas.Body>
             </Navbar.Offcanvas>
             <button className="nav-buttons" type="button">
-              <Link to="/login" className="buttons-text">Login</Link>
+              <Link to="/" className="buttons-text">Login</Link>
             </button>
             <button className="nav-buttons" type="button">
               <Link to="/registro" className="buttons-text">Registro</Link>

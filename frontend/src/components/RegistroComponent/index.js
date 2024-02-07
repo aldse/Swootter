@@ -5,7 +5,6 @@ import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
 import CryptoJS from "crypto-js";
 import { SECRET } from "../../env";
-import CryptoJS from "crypto-js";
 
 export default function RegistroComponent() {
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);

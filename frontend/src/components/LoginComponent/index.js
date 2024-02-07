@@ -28,11 +28,13 @@ export default function LoginComponent() {
         JSON.stringify(json),
         SECRET
       ).toString();
-      var res = await axios.post("http://localhost:8080/user/login", {
+      var res = await axios.post("http://localhost:8080/user/", {
         jsonCrypt,
       });
       sessionStorage.setItem("token", res.data.token);
-      navigate("/feed");
+      sessionStorage.setItem('userId', res.data.userId);
+
+      navigate("/");
     } catch (error) {
       setMessage("Erro ao se conectar");
       setShow(true);

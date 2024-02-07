@@ -98,7 +98,7 @@ class UserController {
                     expiresIn: '1 day'
                 }
             );
-            res.status(200).send({ message: "User logged in with success.", token: token });
+            res.status(200).send({ message: "User logged in with success.", token: token, userId: findByUsernameOrEmail._id });
         } catch (error) {
             return res.status(500).send({ message: 'Something failed when trying to register the user', data: error.message});
         }

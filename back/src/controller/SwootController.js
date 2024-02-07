@@ -2,6 +2,7 @@ const { UserModel } = require("../model/UserModel");
 const { SwootModel } = require("../model/SwootModel");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const jwt_decode = require('jwt-decode');
 require("dotenv").config();
 
 function Decrypt(text) {
@@ -13,14 +14,10 @@ function Decrypt(text) {
 
 class SwootController {
   static async Swoot(req, res) {
-    var decrypted = Decrypt(req.body.jsonCrypt);
-    const json = JSON.parse(decrypted);
-    // const json = req.body;
+    const { token, text, isAnswer } = req.body;
 
-    const { token, text, isAnswer } = json;
-    const userid = jwt.decode(token).userid;
-
-    const user = await UserModel.findOne({ _id: userid });
+    const decode = jwt_decode.jwtDecode(token);
+    const user = await UserModel.findOne({ _id: decode.userid });
 
     const swoot = new SwootModel({
       user: user,
