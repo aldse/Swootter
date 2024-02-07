@@ -45,6 +45,21 @@ class LikesController {
             return res.status(500).send({ message: 'Something failed when trying like the swoot', data: error.message});
         }
     }
+
+    static async GetAllLikes(req, res) {
+        const swootid = req.params.id;
+        const swoot = await SwootModel.findOne({ _id: swootid});
+
+        try {
+            const likes = await LikesModel.find({ swoot: swoot });
+            res.status(200).send({ likes: likes });
+          } catch (error) {
+            return res.status(500).send({
+              message: "Something failed when trying to get all likes from this swoot",
+              data: error.message,
+            });
+          }
+    }
 }
 
 module.exports = LikesController;
