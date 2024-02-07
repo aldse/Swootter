@@ -1,7 +1,4 @@
 import logo from "./img/loguinhologo.png";
-import home from "./img/casinha.png";
-import chama from "./img/hot2.png";
-import perfil from "./img/perfil2.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";

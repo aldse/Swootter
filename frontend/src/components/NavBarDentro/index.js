@@ -7,9 +7,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Header, NavLink, LogoContainer, NavLinkContainer } from "./styled"; // Importe os estilos
+import { LogoContainer, NavLinkContainer } from "./styled"; 
+import React from 'react';
+import ModalAddSweet from "../ModalAddSweet/index";
 
 function NavBarDentro() {
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
       {["md"].map((expand) => (
@@ -34,43 +37,60 @@ function NavBarDentro() {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
-              <Offcanvas.Body className="d-flex flex-column align-items-center" style={{ width: "90%" }}> 
+              <Offcanvas.Body
+                className="d-flex flex-column align-items-center"
+                style={{ width: "90%" }}
+              >
                 <NavLinkContainer>
-                  <Nav.Link to="/perfil" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={perfil}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
+                  <Nav.Link
+                    to="/perfil"
+                    style={{ padding: "2%", color: "white" }}
+                  >
+                    <img
+                      src={perfil}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                    />
                   </Nav.Link>
                   <Nav.Link to="/" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={home}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
+                    <img
+                      src={home}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                    />
                   </Nav.Link>
-                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={chama}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
+                  <Nav.Link
+                    to="/tops"
+                    style={{ padding: "2%", color: "white" }}
+                  >
+                    <img
+                      src={chama}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                    />
                   </Nav.Link>
-                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
-                  <img
-                  src={add}
-                  width="60"
-                  height="60"
-                  className="d-inline-block align-top"
-                  alt="Logo"
-                />
+                  <Nav.Link
+                    to="/tops"
+                    style={{ padding: "2%", color: "white" }}
+                  >
+                    <img
+                      src={add}
+                      width="60"
+                      height="60"
+                      className="d-inline-block align-top"
+                      alt="Logo"
+                      onClick={() => setModalShow(true)}
+                    />
+                    <ModalAddSweet
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
                   </Nav.Link>
                 </NavLinkContainer>
               </Offcanvas.Body>

@@ -3,7 +3,6 @@ import { Button, Card, Form } from "react-bootstrap";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
-import {SECRET} from "../../env";
 import CryptoJS from "crypto-js";
 import { SECRET } from "../../env";
 
