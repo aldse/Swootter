@@ -16,11 +16,11 @@ function NavBarDentro() {
   return (
     <>
       {["md"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="bg-transparent mb-3">
+        <Navbar key={expand} expand={expand} className="bg-color mb-3">
           {" "}
           <Container fluid>
             <LogoContainer>
-              <Navbar.Brand href="#home">
+              <Navbar.Brand href="/feed">
                 <img
                   src={logo}
                   width="80"
@@ -37,60 +37,43 @@ function NavBarDentro() {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
-              <Offcanvas.Body
-                className="d-flex flex-column align-items-center"
-                style={{ width: "90%" }}
-              >
+              <Offcanvas.Body className="d-flex flex-column align-items-center" style={{ width: "90%" }}> 
                 <NavLinkContainer>
-                  <Nav.Link
-                    to="/perfil"
-                    style={{ padding: "2%", color: "white" }}
-                  >
-                    <img
-                      src={perfil}
-                      width="60"
-                      height="60"
-                      className="d-inline-block align-top"
-                      alt="Logo"
-                    />
+                  <Nav.Link to="/perfil" style={{ padding: "2%", color: "white" }}>
+                  <img
+                  src={perfil}
+                  width="60"
+                  height="60"
+                  className="d-inline-block align-top"
+                  alt="Logo"
+                />
                   </Nav.Link>
                   <Nav.Link to="/" style={{ padding: "2%", color: "white" }}>
-                    <img
-                      src={home}
-                      width="60"
-                      height="60"
-                      className="d-inline-block align-top"
-                      alt="Logo"
-                    />
+                  <img
+                  src={home}
+                  width="60"
+                  height="60"
+                  className="d-inline-block align-top"
+                  alt="Logo"
+                />
                   </Nav.Link>
-                  <Nav.Link
-                    to="/tops"
-                    style={{ padding: "2%", color: "white" }}
-                  >
-                    <img
-                      src={chama}
-                      width="60"
-                      height="60"
-                      className="d-inline-block align-top"
-                      alt="Logo"
-                    />
+                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
+                  <img
+                  src={chama}
+                  width="60"
+                  height="60"
+                  className="d-inline-block align-top"
+                  alt="Logo"
+                />
                   </Nav.Link>
-                  <Nav.Link
-                    to="/tops"
-                    style={{ padding: "2%", color: "white" }}
-                  >
-                    <img
-                      src={add}
-                      width="60"
-                      height="60"
-                      className="d-inline-block align-top"
-                      alt="Logo"
-                      onClick={() => setModalShow(true)}
-                    />
-                    <ModalAddSweet
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    />
+                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
+                  <img
+                  src={add}
+                  width="60"
+                  height="60"
+                  className="d-inline-block align-top"
+                  alt="Logo"
+                />
                   </Nav.Link>
                 </NavLinkContainer>
               </Offcanvas.Body>

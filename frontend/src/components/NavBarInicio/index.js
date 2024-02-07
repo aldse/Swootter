@@ -6,8 +6,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { NavLinkContainer } from "./styled"; // Importe os estilos
 import "./style.css";
 import { Link } from "react-router-dom";
-import styles from './styles.module.scss';
-
 
 function NavBarInicio() {
   return (

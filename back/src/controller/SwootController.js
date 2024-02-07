@@ -42,45 +42,13 @@ class SwootController {
     }
   }
 
-  static async GetSwoot(req, res) {
-    var decrypted = Decrypt(req.body.jsonCrypt);
-    const json = JSON.parse(decrypted);
-    // const json = req.body;
-
-    const { user, text } = json;
-
-    const findByIdUser = await UserModel.findOne([{ user }]);
-
-    var response;
-    Object.entries(json).forEach((entry) => {
-      if (!entry[1] || entry[1] == "") {
-        response = `${entry[0]} is mandatory!`;
-        return;
-      }
-    });
-    if (response) return res.status(400).json({ message: response });
-
-    if (!findByIdUser) return res.status(422).json({ message: "Invalid user" });
-
-    var decrypted = Decrypt(findByIdUser.text);
-    if (decrypted != text)
-      return res.status(422).json({ message: "Invalid text!" });
-
+  static async GetAllSwoots(req, res) {
     try {
-      const secret = process.env.SECRET;
-      const token = jwt.sign(
-        {
-          userid: findByIdUser._id,
-        },
-        secret,
-        {
-          expiresIn: "1 day",
-        }
-      );
-      res.status(200).send({ token: token });
+      const swoots = await SwootModel.find();
+      res.status(200).send({ swoots: swoots });
     } catch (error) {
       return res.status(500).send({
-        message: "Something failed when trying to post the swoot",
+        message: "Something failed when trying to get all posts",
         data: error.message,
       });
     }
