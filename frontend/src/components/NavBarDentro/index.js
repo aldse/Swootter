@@ -7,17 +7,18 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Header, NavLink, LogoContainer, NavLinkContainer } from "./styled"; // Importe os estilos
+import { LogoContainer, NavLinkContainer } from "./styled";
+import "./style.css";
 
 function NavBarDentro() {
   return (
     <>
       {["md"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="bg-transparent mb-3">
+        <Navbar key={expand} expand={expand} className="bg-color mb-3">
           {" "}
           <Container fluid>
             <LogoContainer>
-              <Navbar.Brand href="#home">
+              <Navbar.Brand href="/feed">
                 <img
                   src={logo}
                   width="80"
@@ -34,9 +35,9 @@ function NavBarDentro() {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
-              <Offcanvas.Body className="d-flex flex-column align-items-center" style={{ width: "90%" }}> 
+              <Offcanvas.Body className="d-flex flex-column align-items-center" style={{ width: "90%"}}> 
                 <NavLinkContainer>
-                  <Nav.Link to="/perfil" style={{ padding: "2%", color: "white" }}>
+                  <Nav.Link to="/perfil" style={{ padding: "3%", color: "white" }}>
                   <img
                   src={perfil}
                   width="60"
@@ -45,7 +46,7 @@ function NavBarDentro() {
                   alt="Logo"
                 />
                   </Nav.Link>
-                  <Nav.Link to="/" style={{ padding: "2%", color: "white" }}>
+                  <Nav.Link to="/" style={{ padding: "3%", color: "white" }}>
                   <img
                   src={home}
                   width="60"
@@ -54,7 +55,7 @@ function NavBarDentro() {
                   alt="Logo"
                 />
                   </Nav.Link>
-                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
+                  <Nav.Link to="/tops" style={{ padding: "3%", color: "white" }}>
                   <img
                   src={chama}
                   width="60"
@@ -63,7 +64,7 @@ function NavBarDentro() {
                   alt="Logo"
                 />
                   </Nav.Link>
-                  <Nav.Link to="/tops" style={{ padding: "2%", color: "white" }}>
+                  <Nav.Link to="/tops" style={{ padding: "3%", color: "white" }}>
                   <img
                   src={add}
                   width="60"

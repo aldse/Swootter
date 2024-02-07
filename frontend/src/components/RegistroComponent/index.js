@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
-import {SECRET} from "../../env";
-import CryptoJS from "crypto-js";
 import { SECRET } from "../../env";
+import CryptoJS from "crypto-js";
 
 export default function RegistroComponent() {
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);
@@ -29,10 +28,12 @@ export default function RegistroComponent() {
       password: senha,
       confirmpassword: confirmesenha
     };
+
     const jsonCrypt = CryptoJS.AES.encrypt(
       JSON.stringify(json),
-    //   SECRET
+      SECRET
     ).toString();
+    
     try {
       var res = await axios.post("http://localhost:8080/api/author/", {
         jsonCrypt,
