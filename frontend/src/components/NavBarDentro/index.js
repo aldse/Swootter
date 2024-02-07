@@ -3,18 +3,28 @@ import home from "./img/casinha.png";
 import chama from "./img/hot2.png";
 import perfil from "./img/perfil5.png";
 import add from "./img/btn1.png";
+import sair from "./img/sair.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { LogoContainer, NavLinkContainer } from "./styled"; 
-import React from 'react';
+import { LogoContainer, NavLinkContainer } from "./styled";
+import React from "react";
 import ModalAddSweet from "../ModalAddSweet/index";
-import { NavLink } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Image, NavLink } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavBarDentro() {
   const [modalShow, setModalShow] = React.useState(false);
+
+  const navigate = useNavigate();
+
+  function logout() {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userId");
+    navigate("/login");
+  }
+
   return (
     <>
       {["md"].map((expand) => (
@@ -45,7 +55,7 @@ function NavBarDentro() {
               >
                 <NavLinkContainer>
                   <Link
-                    to={`perfil/${sessionStorage.getItem('userId')}`}
+                    to={`perfil/${sessionStorage.getItem("userId")}`}
                     style={{ padding: "2%", color: "white" }}
                   >
                     <img
@@ -65,10 +75,7 @@ function NavBarDentro() {
                       alt="Logo"
                     />
                   </Link>
-                  <Link
-                    to="/tops"
-                    style={{ padding: "2%", color: "white" }}
-                  >
+                  <Link to="/tops" style={{ padding: "2%", color: "white" }}>
                     <img
                       src={chama}
                       width="60"
@@ -77,9 +84,7 @@ function NavBarDentro() {
                       alt="Logo"
                     />
                   </Link>
-                  <Link
-                    style={{ padding: "2%", color: "white" }}
-                  >
+                  <Link style={{ padding: "2%", color: "white" }}>
                     <img
                       src={add}
                       width="60"
@@ -93,10 +98,19 @@ function NavBarDentro() {
                       onHide={() => setModalShow(false)}
                     />
                   </Link>
+
                 </NavLinkContainer>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
+                  <Image
+                    src={sair}
+                    width="80"
+                    height="80"
+                    className="d-inline-block align-top"
+                    alt="Logo"
+                    onClick={logout}
+                  />
         </Navbar>
       ))}
     </>
