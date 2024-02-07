@@ -41,11 +41,7 @@ export default function RegistroComponent() {
       setMessage(res.data.message);
       setVariant("success");
       setShow(true);
-      setNome("");
-      setNomeusuario("");
-      setEmail("");
-      setSenha("");
-      setConfirmeSenha("");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
