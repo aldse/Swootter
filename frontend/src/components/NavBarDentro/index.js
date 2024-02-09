@@ -73,7 +73,7 @@ function NavBarDentro() {
                       alt="Logo"
                     />
                   </Link>
-                  <Link to="/tops" style={{ padding: "2%", color: "white" }}>
+                  <Link to="/trends" style={{ padding: "2%", color: "white" }}>
                     <img
                       src={chama}
                       width="60"

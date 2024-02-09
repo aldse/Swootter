@@ -9,6 +9,7 @@ import RotaProtegida from "./pages/RotaProtegida";
 import AcessoRestrito from "./pages/AcessoRestrito";
 import UsuarioFeed from "./pages/UsuarioFeed";
 import UsuarioPerfil from "./pages/usuarioperfil";
+import Trends from "./pages/trends";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<RotaProtegida errorPage={<AcessoRestrito />} targetPage={<NavBarDentro />} />}>
             <Route path="feed" element={<UsuarioFeed />} />
             <Route path="perfil/:idUsuario" element={<UsuarioPerfil />} />
+            <Route path="trends" element={<Trends />} />
           </Route>
           {/* Rota para o perfil do usuário dentro do feed */}
 
