@@ -9,18 +9,44 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import perfil from "../NavBarDentro/img/perfil5.png";
 import { BiLike, BiSolidLike, BiCommentDetail } from "react-icons/bi";
+import { jwtDecode } from "jwt-decode";
 
 export default function SwootFeed() {
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);
-  var [swootData, setSwootData] = useState([]);
+  const [swootData, setSwootData] = useState([]);
 
-  async function likeSwoot() {
-    
+  function ShowLike({likes}) {
+    var userid = jwtDecode(sessionStorage.getItem('token'));
+    let curtido = false;
+    likes.likes.map(like => {
+      if(like.user._id == userid.userid)
+        curtido = true;
+    });
+    if(curtido)
+      return <BiSolidLike className={styles.interactionButtons} style={{ color: '#f31c68'}}/>
+    return  <BiLike className={styles.interactionButtons} style={{ color: '#f31c68'}}/>
+  }
+
+  async function likeSwoot(swootid) {
+    try {
+      var token = sessionStorage.getItem('token');
+      const res = await axios.post("http://localhost:8080/likes", {
+        token,
+        swootid
+      });
+      setSwoots();
+      return res.message;
+    } catch (error) {
+      setMessage(error);
+      setShow(true);
+      setVariant("danger");
+    }
   }
 
   async function getSwoots() {
     try {
       const res = await axios.get("http://localhost:8080/swoot/get-all");
+      setSwootData(res.data.swoots)
       return res.data.swoots;
     } catch (error) {
       setMessage(error);
@@ -55,7 +81,7 @@ export default function SwootFeed() {
 
   return (
     <>
-      {swootData.map((swoot) => (
+      { swootData[0]?.likes && swootData.map((swoot) => (
         <Container className={styles.Container} key={swoot._id}>
           <Row className={styles.row}>
             <Col xs={4} md={3} className={styles.imagem}>
@@ -72,12 +98,11 @@ export default function SwootFeed() {
                 <p>{swoot.text}</p>
             </Col>
             <Card.Footer className={styles.footer}>
-              <Button variant="link" style={{ textDecoration: "none" }}>
+              <Button variant="link" style={{ textDecoration: "none" }} onClick={() => likeSwoot(swoot._id)}>
                 <div style={{ display: "flex" }}>
-                  <BiLike className={styles.interactionButtons} style={{ color: '#f31c68'}}/>
-                  <div className={styles.hide} style={{ margin: "0 0 0 10px"}}>{swoot.likes.length}</div>
+                  <ShowLike likes={swoot}/>
+                  <div className={styles.hide} style={{ margin: "0 0 0 10px"}}>{swoot.likes?.length}</div>
                 </div>
-                {/* <BiSolidLike style={{ color: '#f31c68'}}/> */}
               </Button>
               <Button variant="link" style={{ textDecoration: "none" }}>
                 <div style={{ display: "flex" }}>

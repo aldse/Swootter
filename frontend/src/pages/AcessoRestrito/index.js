@@ -1,7 +1,7 @@
 export default function AcessoRestrito(){
     return(
         <>
-        <p> AcessoRestrito</p>
+        <p style={{fontSize: "500px"}}> AcessoRestrito</p>
         </>
     )
 }

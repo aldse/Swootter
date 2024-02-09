@@ -32,9 +32,7 @@ export default function LoginComponent() {
         jsonCrypt,
       });
       sessionStorage.setItem("token", res.data.token);
-      sessionStorage.setItem('userId', res.data.userId);
-
-      navigate("/");
+      navigate("/feed");
     } catch (error) {
       setMessage("Erro ao se conectar");
       setShow(true);

@@ -12,11 +12,7 @@ function Decrypt(text) {
 
 class LikesController {
     static async Like(req, res) {
-        var decrypted = Decrypt(req.body.jsonCrypt);
-        const json = JSON.parse(decrypted);
-        // const json = req.body;
-
-        const { token, swootid } = json;
+        const { token, swootid } = req.body;
         const userid = jwt.decode(token).userid;
 
         const user = await UserModel.findOne({ _id: userid });
@@ -48,11 +44,10 @@ class LikesController {
 
     static async GetAllLikes(req, res) {
         const swootid = req.params.id;
-        const swoot = await SwootModel.findOne({ _id: swootid});
-
         try {
+            const swoot = await SwootModel.findOne({ _id: swootid});
             const likes = await LikesModel.find({ swoot: swoot });
-            res.status(200).send({ likes: likes });
+            return res.status(200).send({ likes: likes });
           } catch (error) {
             return res.status(500).send({
               message: "Something failed when trying to get all likes from this swoot",

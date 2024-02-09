@@ -28,13 +28,13 @@ function App() {
             path="/feed" element={
               <RotaProtegida
                 errorPage={<AcessoRestrito />}
-                targetPage={<NavBarInicio />}
+                targetPage={<NavBarDentro />}
               />
             }
           >
-            <Route path='' element={<UsuarioFeed />} />
-            <Route path="add" element={<AddPostPage />} />
-          </Route> */}
+            <Route path='' element={<UsuarioFeed />} /> */}
+            {/* <Route path="add" element={<AddPostPage />} /> */}
+          {/* </Route> */}
         </Routes>
       </AlertaProvider>
     </>

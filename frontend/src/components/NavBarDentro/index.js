@@ -5,18 +5,18 @@ import perfil from "./img/perfil5.png";
 import add from "./img/btn1.png";
 import sair from "./img/sair.png";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { LogoContainer, NavLinkContainer } from "./styled";
 import React from "react";
 import ModalAddSweet from "../ModalAddSweet/index";
 import { Image, NavLink } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { jwtDecode }from 'jwt-decode';
 
 function NavBarDentro() {
   const [modalShow, setModalShow] = React.useState(false);
-
+  const userid = jwtDecode(sessionStorage.getItem('token'));
   const navigate = useNavigate();
 
   function logout() {
@@ -55,7 +55,7 @@ function NavBarDentro() {
               >
                 <NavLinkContainer>
                   <Link
-                    to={`perfil/${sessionStorage.getItem("userId")}`}
+                    to={`perfil/${userid}`}
                     style={{ padding: "2%", color: "white" }}
                   >
                     <img
@@ -113,6 +113,7 @@ function NavBarDentro() {
                   />
         </Navbar>
       ))}
+      <Outlet/>
     </>
   );
 }
