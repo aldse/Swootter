@@ -30,7 +30,7 @@ class SwootController {
 
     try {
       await SwootModel.create(swoot);
-      return res.status(200).send({ message: "You swoot with success!" });
+      return res.status(200).send({ message: "Swoot adicionado com sucesso" });
     } catch (error) {
       return res.status(500).send({
         message: "Something failed when trying to make the swoot",
@@ -60,7 +60,7 @@ class SwootController {
 
       try {
           await SwootModel.deleteOne({ _id: swootid });
-          res.status(200).send({ message: 'Swoot deleted with success.' });
+          res.status(200).send({ message: 'Swoot deletado com sucesso' });
       } catch (error) {
           return res.status(500).send({ message: 'Something failed when trying to delete the swoot', data: error.message});
       }

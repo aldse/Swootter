@@ -4,7 +4,7 @@ body {
   font-family: 'Amatic SC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(0deg, rgba(128,83,248,1) 0%, rgba(242,99,192,1) 100%);
+  background: linear-gradient(0deg, rgba(128,83,248,1) 0%, #f263c0 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }

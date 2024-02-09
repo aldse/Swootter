@@ -1,35 +1,56 @@
 import perfil from "./img/perfil2.png";
 import styles from "./styles.module.scss";
 
-export default function UsuarioPerfilComponent() {
+export default function UsuarioPerfilComponent({setCards}) {
+  const handleSweetsClick = () => {
+    console.log("Sweets clicado!");
+    setCards(0);
+  };
+
+  const handleRespostasClick = () => {
+    console.log("Respostas clicado!");
+    setCards(1);
+  };
+
+  const handleLikesClick = () => {
+    console.log("Likes clicado!");
+    setCards(2);
+  };
+
   return (
     <>
-    <div className={styles.func}>
-      <div className={styles.center}>
-        <img
-          src={perfil}
-          width="100"
-          height="100"
-          className="d-inline-block align-top"
-          alt="Logo"
-        />
+      <div className={styles.func}>
+        <div className={styles.center}>
+          <img
+            src={perfil}
+            width="120"
+            height="120"
+            className="d-inline-block align-top"
+            alt="Logo"
+          />
+        </div>
+        <div className={styles.funca}>
+          <p className={styles.bio}>Fulano de Tal</p>
+          <p className={styles.name}>@Fulano</p>
+          <p>Bio Bio Bio Bio Bio Bio Bio Bio</p>
+          <p>09/02/2024</p>
+        </div>
       </div>
-      <div className={styles.funca}>
-      <p className={styles.bio}>Fulano de Tal</p>
-      <p className={styles.name}>@Fulano</p>
-      <p>Bio Bio Bio Bio Bio Bio Bio Bio</p>
-      <p>09/02/2024</p>
-      </div>
-      </div>
-      <hr/>
+      {/* <hr className={styles.hr}/> */}
       <div className={styles.botoes}>
-      <p>Tweets</p>
-      {/* <div class={styles.verticalline}></div> */}
-      <p>Respostas</p>
-      {/* <div class={styles.verticalline}></div> */}
-      <p>Like</p>
+        <p className={styles.p} onClick={handleSweetsClick}>
+          Sweets
+        </p>
+        <div className={styles.verticalline}></div>
+        <p className={styles.p} onClick={handleRespostasClick}>
+          Respostas
+        </p>
+        <div className={styles.verticalline}></div>
+        <p className={styles.p} onClick={handleLikesClick}>
+          Likes
+        </p>
       </div>
-      <hr/>
+      {/* <hr className={styles.hr}/> */}
     </>
   );
 }
