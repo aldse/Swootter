@@ -7,10 +7,9 @@ import NavBarDentro from "../../components/NavBarDentro";
 export default function UsuarioPerfil(){
     return(
         <>
-        <NavBarDentro />
         <Col className={styles.container}>
             <Row className={styles.center}>
-                <Col xs={12} sm={8} md={6}>
+                <Col xs={12} sm={8} md={10}>
                     <AlertaComponent />
                     <UsuarioPerfilComponent />
                 </Col>

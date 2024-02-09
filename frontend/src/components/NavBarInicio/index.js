@@ -38,7 +38,7 @@ function NavBarInicio() {
               </Offcanvas.Body>
             </Navbar.Offcanvas>
             <button className="nav-buttons" type="button">
-              <Link to="/" className="buttons-text">Login</Link>
+              <Link to="/login" className="buttons-text">Login</Link>
             </button>
             <button className="nav-buttons" type="button">
               <Link to="/registro" className="buttons-text">Registro</Link>

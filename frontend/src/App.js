@@ -17,7 +17,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
-          
+
+          {/* <Route path="/aaa" element={<UsuarioPerfil />} /> */}
+
           <Route path="/" element={<RotaProtegida errorPage={<AcessoRestrito />} targetPage={<NavBarDentro />} />}>
             <Route path="feed" element={<UsuarioFeed />} />
             <Route path="perfil/:idUsuario" element={<UsuarioPerfil />} />

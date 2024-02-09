@@ -1,22 +1,35 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import perfil from "./img/perfil2.png";
+import styles from "./styles.module.scss";
 
 export default function UsuarioPerfilComponent() {
   return (
     <>
-    <p>wsdfvg</p>
-    <Container>
-      <Row>
-        <Col>1 of 2</Col>
-        <Col>2 of 2</Col>
-      </Row>
-      <Row>
-        <Col>1 of 3</Col>
-        <Col>2 of 3</Col>
-        <Col>3 of 3</Col>
-      </Row>
-    </Container>
+    <div className={styles.func}>
+      <div className={styles.center}>
+        <img
+          src={perfil}
+          width="100"
+          height="100"
+          className="d-inline-block align-top"
+          alt="Logo"
+        />
+      </div>
+      <div className={styles.funca}>
+      <p className={styles.bio}>Fulano de Tal</p>
+      <p className={styles.name}>@Fulano</p>
+      <p>Bio Bio Bio Bio Bio Bio Bio Bio</p>
+      <p>09/02/2024</p>
+      </div>
+      </div>
+      <hr/>
+      <div className={styles.botoes}>
+      <p>Tweets</p>
+      {/* <div class={styles.verticalline}></div> */}
+      <p>Respostas</p>
+      {/* <div class={styles.verticalline}></div> */}
+      <p>Like</p>
+      </div>
+      <hr/>
     </>
   );
 }

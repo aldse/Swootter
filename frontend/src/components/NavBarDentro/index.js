@@ -8,11 +8,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { LogoContainer, NavLinkContainer } from "./styled";
+import { Links, LogoContainer, Logout, NavLinkContainer, Void } from "./styled";
 import React from "react";
 import ModalAddSweet from "../ModalAddSweet/index";
 import { Image, NavLink } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function NavBarDentro() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -49,11 +49,9 @@ function NavBarDentro() {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
-              <Offcanvas.Body
-                className="d-flex flex-column align-items-center"
-                style={{ width: "90%" }}
-              >
-                <NavLinkContainer>
+              <NavLinkContainer>
+                <Void />
+                <Links>
                   <Link
                     to={`perfil/${sessionStorage.getItem("userId")}`}
                     style={{ padding: "2%", color: "white" }}
@@ -98,11 +96,8 @@ function NavBarDentro() {
                       onHide={() => setModalShow(false)}
                     />
                   </Link>
-
-                </NavLinkContainer>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
+                </Links>
+                <Logout>
                   <Image
                     src={sair}
                     width="80"
@@ -111,8 +106,13 @@ function NavBarDentro() {
                     alt="Logo"
                     onClick={logout}
                   />
+                </Logout>
+              </NavLinkContainer>
+            </Navbar.Offcanvas>
+          </Container>
         </Navbar>
       ))}
+      <Outlet />
     </>
   );
 }

@@ -1,0 +1,35 @@
+.func {
+  width: 100% !important;
+  display: flex;
+  padding-left: 5%;
+}
+
+.center {
+  width: 100px; 
+}
+
+.funca {
+  margin: 0;
+  margin-top: 1.5% !important;
+  margin-left: 5%; 
+}
+
+.bio{
+  margin-bottom: 0;
+  font-size: 2.5vh;
+}
+
+.name{
+  font-weight: bold;
+}
+
+.botoes{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.verticalline {
+  border-left: 1px solid black;
+  height: 10p;
+}
