@@ -5,7 +5,6 @@ import perfil from "./img/perfil5.png";
 import add from "./img/btn1.png";
 import sair from "./img/sair.png";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Links, LogoContainer, Logout, NavLinkContainer, Void } from "./styled";
@@ -13,10 +12,11 @@ import React from "react";
 import ModalAddSweet from "../ModalAddSweet/index";
 import { Image, NavLink } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
 
 function NavBarDentro() {
   const [modalShow, setModalShow] = React.useState(false);
-
+  const userid = jwtDecode(sessionStorage.getItem('token'));
   const navigate = useNavigate();
 
   function logout() {
@@ -49,9 +49,11 @@ function NavBarDentro() {
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
-              <NavLinkContainer>
-                <Void />
-                <Links>
+              <Offcanvas.Body
+                className="d-flex flex-column align-items-center"
+                style={{ width: "90%" }}
+              >
+                <NavLinkContainer>
                   <Link
                     to={`perfil/${sessionStorage.getItem("userId")}`}
                     style={{ padding: "2%", color: "white" }}
@@ -96,8 +98,11 @@ function NavBarDentro() {
                       onHide={() => setModalShow(false)}
                     />
                   </Link>
-                </Links>
-                <Logout>
+
+                </NavLinkContainer>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
                   <Image
                     src={sair}
                     width="80"
@@ -106,10 +111,6 @@ function NavBarDentro() {
                     alt="Logo"
                     onClick={logout}
                   />
-                </Logout>
-              </NavLinkContainer>
-            </Navbar.Offcanvas>
-          </Container>
         </Navbar>
       ))}
       <Outlet />

@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { NavLinkContainer } from "./styled"; // Importe os estilos
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function NavBarInicio() {
   return (
@@ -46,6 +46,7 @@ function NavBarInicio() {
           </Container>
         </Navbar>
       ))}
+      <Outlet/>
     </>
   );
 }

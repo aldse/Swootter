@@ -2,14 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
-  border-radius: 4px;
-  background-color: white;
+  border-radius: 10px;
+  background-color: #2C2C2C;
+  color: white;
+  margin: 0 0 10px 0;
+  padding: 10px;
 }
 
 .img {
   position: relative;
-  max-width: 7%;
+  max-width: 10%;
   width: auto;
 }
 
@@ -31,12 +33,16 @@
 
 .footer{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   align-content: center;
   width: 100%;
   text-decoration: none !important;
-  color: black !important;
+  color: gray !important;
+}
+
+.interactionButtons {
+  font-size: 25px;
 }
 
 .date{
@@ -45,18 +51,17 @@
   width: 100%;
 }
 
-//vai
-.Containercre{
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid white;
-  border-radius: 4px;
-  background-color: white;
+.hide {
+  font-size: medium;
+  color: gray;
+}
+
+.name {
+  font-weight: 500;
 }
 
 .texto p {
+  font-size: 18px;
   width: fit-content;
   word-wrap: break-word;
 }

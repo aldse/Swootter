@@ -12,11 +12,7 @@ function Decrypt(text) {
 
 class LikesController {
     static async Like(req, res) {
-        var decrypted = Decrypt(req.body.jsonCrypt);
-        const json = JSON.parse(decrypted);
-        // const json = req.body;
-
-        const { token, swootid } = json;
+        const { token, swootid } = req.body;
         const userid = jwt.decode(token).userid;
 
         const user = await UserModel.findOne({ _id: userid });
@@ -44,6 +40,20 @@ class LikesController {
         } catch (error) {
             return res.status(500).send({ message: 'Something failed when trying like the swoot', data: error.message});
         }
+    }
+
+    static async GetAllLikes(req, res) {
+        const swootid = req.params.id;
+        try {
+            const swoot = await SwootModel.findOne({ _id: swootid});
+            const likes = await LikesModel.find({ swoot: swoot });
+            return res.status(200).send({ likes: likes });
+          } catch (error) {
+            return res.status(500).send({
+              message: "Something failed when trying to get all likes from this swoot",
+              data: error.message,
+            });
+          }
     }
 }
 

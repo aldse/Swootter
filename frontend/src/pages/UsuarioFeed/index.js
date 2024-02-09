@@ -7,7 +7,6 @@ import SwootFeed from "../../components/SwootFeed";
 export default function UsuarioFeed() {
   return (
     <>
-      <NavBarDentro />
       <Col className={styles.container}>
         <Row className={styles.center}>
           <Col xs={12} sm={8} md={4}>

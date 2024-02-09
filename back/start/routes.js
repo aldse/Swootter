@@ -8,5 +8,5 @@ module.exports = function (app) {
         .use(express.json())
         .use('/user', user)
         .use('/swoot', swoot)
-        .use('/like', like)
+        .use('/likes', like)
 }
