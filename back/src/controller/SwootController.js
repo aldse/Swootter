@@ -51,11 +51,23 @@ class SwootController {
     }
   }
 
+  // static async GetById(req, res) {
+  //   const {_id} = req.params
+  //   try {
+  //     const swoots = await SwootModel.findById(_id);
+  //     console.log
+  //     res.status(200).send({ swoots: swoots });
+  //   } catch (error) {
+  //     return res.status(500).send({
+  //       message: "Something failed when trying to get post",
+  //       data: error.message,
+  //     });
+  //   }
+  // }
+
   static async Delete(req, res) {
       var decrypted = Decrypt(req.body.jsonCrypt);
       const json = JSON.parse(decrypted);
-      // const json = req.body;
-
       const { swootid } = json;
 
       try {

@@ -6,4 +6,5 @@ route
     .post('/', RespostasController.Resposta)
     .get('/get-all/:id', RespostasController.GetAllRespostas)
 
+
 module.exports = route;

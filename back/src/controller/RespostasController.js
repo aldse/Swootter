@@ -1,6 +1,6 @@
 const { UserModel } = require('../model/UserModel');
 const { SwootModel } = require('../model/SwootModel');
-const { RespostasController } = require('../model/RespostasController');
+const { RespostasModel } = require('../model/RespostasModel');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -47,6 +47,7 @@ class RespostasController {
         try {
             const swoot = await SwootModel.findOne({ _id: swootid});
             const Respostas = await RespostasModel.find({ swoot: swoot });
+            console.log(Respostas);
             return res.status(200).send({ Respostas: Respostas });
           } catch (error) {
             return res.status(500).send({

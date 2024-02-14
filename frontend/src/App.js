@@ -10,7 +10,7 @@ import AcessoRestrito from "./pages/AcessoRestrito";
 import UsuarioFeed from "./pages/UsuarioFeed";
 import UsuarioPerfil from "./pages/usuarioperfil";
 import Trends from "./pages/trends";
-
+import ClickSweet from "./pages/ClickSweet";
 function App() {
   return (
     <>
@@ -25,6 +25,7 @@ function App() {
             <Route path="feed" element={<UsuarioFeed />} />
             <Route path="perfil/:idUsuario" element={<UsuarioPerfil />} />
             <Route path="trends" element={<Trends />} />
+            <Route path="ClickSweet/:id" element={<ClickSweet />} />
           </Route>
           {/* Rota para o perfil do usuário dentro do feed */}
 
