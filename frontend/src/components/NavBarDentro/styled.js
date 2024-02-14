@@ -25,6 +25,5 @@ export const Void = styled.div``;
 export const Links = styled.div`
   display: flex;
   flex-direction: row;
-  width: 25vw;
 `;
 export const Logout = styled.div``;

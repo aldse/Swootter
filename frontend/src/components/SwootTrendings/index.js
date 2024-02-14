@@ -56,7 +56,8 @@ export default function SwootFeed() {
 
   async function setSwoots() {
     const swoots = await getSwoots();
-    setSwootData(swoots);
+    var sortedData = swoots.sort((a, b) => b.likes.length - a.likes.length)
+    setSwootData(sortedData);
   }
 
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function SwootFeed() {
 
   return (
     <>
-      {swootData?.slice(0).reverse().map((swoot) => (
+      {swootData?.slice(0).map((swoot) => (
         <Container className={styles.Container} key={swoot._id}>
           <Row className={styles.row}>
             <Col xs={4} md={3} className={styles.imagem}>

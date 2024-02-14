@@ -17,7 +17,6 @@ export default function RegistroComponent() {
   var [datanasc, setDataNasc] = useState(Date());
 
   async function handleSubmit(e) {
-    e.preventDefault();
     if (!formValid()) return;
 
     const json = {
@@ -35,7 +34,7 @@ export default function RegistroComponent() {
     ).toString();
     
     try {
-      var res = await axios.post("http://localhost:8080/api/author/", {
+      var res = await axios.post("http://localhost:8080/user/register", {
         jsonCrypt,
       });
 
@@ -57,12 +56,6 @@ export default function RegistroComponent() {
     }
     if (nomeusuario.includes(" ")) {
       setMessage("Insira um nome de usuário válido");
-      setShow(true);
-      setVariant("danger");
-      return false;
-    }
-    if (!nomeusuario.includes(" ")) {
-      setMessage("Insira um nome de usuário");
       setShow(true);
       setVariant("danger");
       return false;

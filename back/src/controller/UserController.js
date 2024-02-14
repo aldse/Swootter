@@ -13,6 +13,7 @@ class UserController {
         var decrypted = Decrypt(req.body.jsonCrypt);
         const json = JSON.parse(decrypted);
         // const json = req.body;
+        
         const { 
             name, birthdate, username,
             email, password, confirmpassword 

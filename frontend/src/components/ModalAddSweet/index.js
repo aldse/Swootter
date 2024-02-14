@@ -2,11 +2,9 @@ import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styles from "./styles.module.scss";
 import Form from "react-bootstrap/Form";
-import { SECRET } from "../../env";
 import axios from "axios";
-
 import { AlertaContext } from "../../context/alerta/index";
-import CryptoJS from "crypto-js";
+import './style.css'
 
 function ModalAddSweet(props) {
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);
@@ -14,7 +12,6 @@ function ModalAddSweet(props) {
   const [text, setText] = useState("");
 
   async function handleSubmit(e) {
-    e.preventDefault();
     if (!formValid()) return;
 
     try {
@@ -26,6 +23,7 @@ function ModalAddSweet(props) {
       setVariant("success");
       setShow(true);
       setText("");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -57,22 +55,25 @@ function ModalAddSweet(props) {
       centered
     >
       <form>
-        <Modal.Header closeButton className={styles.border}></Modal.Header>
+        <Modal.Header className={styles.border}></Modal.Header>
         <Modal.Body className={styles.modal}>
-          <h4 className={styles.titulo}>Adicionar Sweeet</h4>
+          <h3 className={styles.titulo}>Escreva seu swoot</h3>
 
           <Form.Control
+            as="textarea"
+            style={{ height: 130 }}
+            maxLength={255}
             className={styles.inp}
             onChange={(e) => setText(e.target.value)}
             value={text}
-            aria-describedby="sweetHelpBlock"
+            aria-describedby="swootHelpBlock"
             placeholder="O que deseja dizer?"
           />
         </Modal.Body>
 
         <Modal.Footer className={styles.outro}>
           <button className={styles.form__button} type="submit" onClick={handleSubmit}>
-            Swettar
+            Swoot
           </button>
         </Modal.Footer>
       </form>
