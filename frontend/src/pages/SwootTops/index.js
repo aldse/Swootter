@@ -1,15 +1,15 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "./styles.module.scss";
-import SwootFeed from "../../components/SwootFeed";
+import SwootTrendings from "../../components/SwootTrendings";
 
-export default function UsuarioFeed() {
+export default function SwootTops() {
   return (
     <>
       <Col className={styles.container}>
         <Row className={styles.center}>
           <Col xs={12} sm={8} md={4}>
-            <SwootFeed/>
+            <SwootTrendings/>
           </Col>
         </Row>
       </Col>

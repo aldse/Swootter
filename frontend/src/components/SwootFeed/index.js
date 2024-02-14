@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Button, Card, Spinner } from "react-bootstrap"; // Importe o Spinner do react-bootstrap
+=======
+import React, { useContext, useState, useEffect } from "react";
+import { Button, Card } from "react-bootstrap";
+>>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
 import axios from "axios";
 import styles from "./styles.module.scss";
 import { AlertaContext } from "../../context/alerta/index";
@@ -19,6 +24,7 @@ export default function SwootFeed() {
   const [loading, setLoading] = useState(false);
   const endOfPageRef = useRef();
 
+<<<<<<< HEAD
   function ShowLike({ likes }) {
     var userid = jwtDecode(sessionStorage.getItem("token"));
     let curtido = false;
@@ -42,6 +48,17 @@ export default function SwootFeed() {
         style={{ color: "#f31c68" }}
       />
     );
+=======
+  function ShowLike(likes) {
+    var token = sessionStorage.getItem('token');
+    const jwt = jwtDecode(token);
+    
+    const searchIndex = likes.likes.findIndex(user => user._id == jwt.userid);
+    if (searchIndex != -1)
+      return <BiSolidLike className={styles.interactionButtons} style={{ color: '#f31c68' }} />
+    
+    return <BiLike className={styles.interactionButtons} style={{ color: '#f31c68' }} />
+>>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
   }
 
   async function likeSwoot(swootid) {
@@ -72,6 +89,7 @@ export default function SwootFeed() {
     }
   }
 
+<<<<<<< HEAD
   async function getLikes(swootid) {
     try {
       const res = await axios.get(
@@ -94,6 +112,11 @@ export default function SwootFeed() {
       })
     );
     setSwootData(swootsWithLikes);
+=======
+  async function setSwoots() {
+    const swoots = await getSwoots();
+    setSwootData(swoots);
+>>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
   }
 
   useEffect(() => {
@@ -118,8 +141,13 @@ export default function SwootFeed() {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div ref={endOfPageRef}>
       {swootData.slice(0, itemsPerPage).map((swoot) => (
+=======
+    <>
+      {swootData?.slice(0).reverse().map((swoot) => (
+>>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
         <Container className={styles.Container} key={swoot._id}>
           <Row className={styles.row}>
             <Col xs={4} md={3} className={styles.imagem}>
@@ -144,10 +172,15 @@ export default function SwootFeed() {
                 onClick={() => likeSwoot(swoot._id)}
               >
                 <div style={{ display: "flex" }}>
+<<<<<<< HEAD
                   <ShowLike likes={swoot} />
                   <div className={styles.hide} style={{ margin: "0 0 0 10px" }}>
                     {swoot.likes?.length}
                   </div>
+=======
+                  <ShowLike likes={swoot.likes}/>
+                  <div className={styles.hide} style={{ margin: "0 0 0 10px" }}>{swoot.likes?.length}</div>
+>>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
                 </div>
               </Button>
               {console.log(swoot)}
@@ -156,6 +189,7 @@ export default function SwootFeed() {
                 style={{ textDecoration: "none" }}
               >
                 <div style={{ display: "flex" }}>
+<<<<<<< HEAD
                   <BiCommentDetail
                     className={styles.interactionButtons}
                     style={{ color: "#f31c68" }}
@@ -163,6 +197,10 @@ export default function SwootFeed() {
                   <div className={styles.hide} style={{ margin: "0 0 0 10px" }}>
                     0{}
                   </div>
+=======
+                  <BiCommentDetail className={styles.interactionButtons} style={{ color: '#f31c68' }} />
+                  <div className={styles.hide} style={{ margin: "0 0 0 10px" }}>0{ }</div>
+>>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
                 </div>
               </Link>
             </Card.Footer>

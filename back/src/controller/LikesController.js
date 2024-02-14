@@ -17,11 +17,12 @@ class LikesController {
 
         const user = await UserModel.findOne({ _id: userid });
         const swoot = await SwootModel.findOne({ _id: swootid });
-
-        const searchLike = await LikesModel.findOne({ user: user, swoot: swoot});
-        if (searchLike)
+        
+        var searchIndex = swoot.likes.findIndex(user => user._id == userid);
+        if (searchIndex != -1)
         {
             try {
+                await SwootModel.updateOne({ _id: swootid }, { $pull: { likes: user }})
                 await LikesModel.deleteOne({ user: user, swoot: swoot});
                 return res.status(200).send({ message: 'You removed your like :('});
             } catch (error) {
@@ -35,6 +36,7 @@ class LikesController {
         });
  
         try {
+            await SwootModel.updateOne({ _id: swootid }, { $push: { likes: user }})
             await LikesModel.create(like);
             return res.status(200).send({ message: 'You liked!'});
         } catch (error) {

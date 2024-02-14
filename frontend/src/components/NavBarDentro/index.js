@@ -11,7 +11,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Links, LogoContainer, Logout, NavLinkContainer, Void } from "./styled";
 import React from "react";
 import ModalAddSweet from "../ModalAddSweet/index";
-import { Image, NavLink } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function NavBarDentro() {
@@ -21,7 +21,6 @@ function NavBarDentro() {
 
   function logout() {
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("userId");
     navigate("/login");
   }
 
@@ -51,7 +50,7 @@ function NavBarDentro() {
             >
               <NavLinkContainer>
                 <Void />
-                <Links>
+                <Links className="links">
                   <Link
                     to={`perfil/${sessionStorage.getItem("userId")}`}
                     style={{ padding: "2%", color: "white" }}
@@ -73,7 +72,7 @@ function NavBarDentro() {
                       alt="Logo"
                     />
                   </Link>
-                  <Link to="/trends" style={{ padding: "2%", color: "white" }}>
+                  <Link to="/tops" style={{ padding: "2%", color: "white" }}>
                     <img
                       src={chama}
                       width="60"
