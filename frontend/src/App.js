@@ -29,12 +29,8 @@ function App() {
             <Route path="feed" element={<UsuarioFeed />} />
             <Route path="tops" element={<SwootTops/>} />
             <Route path="perfil/:idUsuario" element={<UsuarioPerfil />} />
-<<<<<<< HEAD
-            <Route path="trends" element={<Trends />} />
-            <Route path="ClickSweet/:id" element={<ClickSweet />} />
-=======
             {/* <Route path="trends" element={<Trends />} /> */}
->>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
+            <Route path="ClickSweet/:id" element={<ClickSweet />} />
           </Route>
           {/* Rota para o perfil do usuário dentro do feed */}
 
