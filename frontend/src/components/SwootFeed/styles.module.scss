@@ -11,6 +11,11 @@
 
 .img {
   position: relative;
+  width: 100%;
+}
+
+.link {
+  position: relative;
   max-width: 10%;
   width: auto;
 }
@@ -62,7 +67,6 @@
 
 .texto p {
   font-size: 18px;
-  width: fit-content;
   word-wrap: break-word;
 }
 

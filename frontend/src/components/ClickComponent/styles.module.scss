@@ -31,7 +31,18 @@
   margin-right: 10px !important; /* Ajuste o valor conforme necessário */
 }
 
-.img {
+.actualimg {
+  position: relative;
+  max-width: 10%;
+  width: auto;
+}
+
+img {
+  position: relative;
+  width: 100%;
+}
+
+.link {
   position: relative;
   max-width: 10%;
   width: auto;
@@ -84,7 +95,6 @@
 
 .texto p {
   font-size: 18px;
-  width: fit-content;
   word-wrap: break-word;
 }
 
@@ -102,4 +112,30 @@
 .bt{
   color: gray !important;
   border-color: gray !important;
+}
+
+.form__button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  border-radius: 5px !important;
+  text-decoration: none !important;
+  color: #2C2C2C !important;
+  border: 2px solid #2C2C2C !important;
+  background-color: white !important;
+  transition: 0.5s !important;
+  font-weight: 500 !important;
+  margin: 0 0 10px 0 !important;
+}
+
+.form__button:hover {
+  border: 2px solid #B64BFD !important;
+  background-color: transparent !important;
+  color: white !important;
+  transition: 0.5s !important;
+}
+
+.inp {
+  resize: none;
 }

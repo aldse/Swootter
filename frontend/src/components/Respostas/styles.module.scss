@@ -1,50 +1,75 @@
-.func {
-  width: 100% !important;
+.Container {
   display: flex;
-  padding-left: 5%;
-}
-
-.center {
-  width: 100px; 
-}
-
-.funca {
-  margin: 0;
-  margin-top: 1.5% !important;
-  margin-left: 5%; 
-}
-
-.bio{
-  margin-bottom: 0;
-  font-size: 2.5vh;
-}
-
-.name{
-  font-weight: bold;
-}
-
-.botoes{
-  display: flex;
-  justify-content: space-around;
-  background-color: #2C2C2C;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
-}
-
-
-.verticalline {
-  border-left: 1px solid #f263c0;
-  height: 50px;
-  margin: 0;
-}
-
-.hr{
-  margin: 0;
-}
-
-.p{
-  margin: auto;
-  width: 100%;
-  text-align: center;
   background-color: #2C2C2C;
   color: white;
+  margin: 2% 0 10px 0;
+  padding: 0px;
+  width: 50% !important;
+  word-wrap: break-word;
+}
+
+.img {
+  position: relative;
+  max-width: 8%;
+  width: 100% !important;
+}
+
+.imagem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.imagem p {
+  margin: 0;
+}
+
+.row {    
+  width: 100% !important;
+}
+
+.footer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  text-decoration: none !important;
+  color: gray !important;
+}
+
+.interactionButtons {
+  font-size: 25px;
+}
+
+.date{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hide {
+  font-size: medium;
+  color: gray;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.texto p {
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
+.h1{
+  font-size: 18px;
+  color: #2C2C2C;
+  display: flex;
+  justify-content: center;
 }

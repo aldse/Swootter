@@ -5,19 +5,25 @@ import perfil from "./img/perfil5.png";
 import add from "./img/btn1.png";
 import sair from "./img/sair.png";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import { Links, LogoContainer, Logout, NavLinkContainer, Void } from "./styled";
 import React from "react";
 import ModalAddSweet from "../ModalAddSweet/index";
 import { Image } from "react-bootstrap";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 function NavBarDentro() {
   const [modalShow, setModalShow] = React.useState(false);
 
   const navigate = useNavigate();
+
+  function getUserId() {
+    var token = sessionStorage.getItem('token');
+    const jwt = jwtDecode(token);
+
+    return jwt.userid;
+  }
 
   function logout() {
     sessionStorage.removeItem("token");
@@ -52,7 +58,7 @@ function NavBarDentro() {
                 <Void />
                 <Links className="links">
                   <Link
-                    to={`perfil/${sessionStorage.getItem("userId")}`}
+                    to={`perfil/${getUserId()}`}
                     style={{ padding: "2%", color: "white" }}
                   >
                     <img

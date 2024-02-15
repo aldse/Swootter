@@ -7,13 +7,13 @@
   color: white;
   margin: 2% 0 10px 0;
   padding: 0px;
-  width: 100% !important;
+  width: 50% !important;
+  word-wrap: break-word;
 }
-
 
 .img {
   position: relative;
-  max-width: 4%;
+  max-width: 8%;
   width: 100% !important;
 }
 
@@ -64,6 +64,12 @@
 
 .texto p {
   font-size: 18px;
-  width: fit-content;
   word-wrap: break-word;
+}
+
+.h1{
+  font-size: 18px;
+  color: #2C2C2C;
+  display: flex;
+  justify-content: center;
 }

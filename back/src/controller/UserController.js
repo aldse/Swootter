@@ -105,6 +105,17 @@ class UserController {
         }
     }
 
+    static async getUserById(req, res) {
+        const userid = req.params.id;
+
+        try {
+            const user = await UserModel.findById(userid);
+            res.status(200).send({ user: user, message: 'User found with success.' });
+        } catch (error) {
+            return res.status(500).send({ message: 'Something failed when trying to find the user', data: error.message});
+        }
+    }
+
     static async DeleteByJwt(req, res) {
         var decrypted = Decrypt(req.body.jsonCrypt);
         const json = JSON.parse(decrypted);

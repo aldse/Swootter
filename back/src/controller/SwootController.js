@@ -41,7 +41,7 @@ class SwootController {
 
   static async GetAllSwoots(req, res) {
     try {
-      const swoots = await SwootModel.find();
+      const swoots = await SwootModel.find({ isAnswer : null });
       res.status(200).send({ swoots: swoots });
     } catch (error) {
       return res.status(500).send({
@@ -51,19 +51,57 @@ class SwootController {
     }
   }
 
-  // static async GetById(req, res) {
-  //   const {_id} = req.params
-  //   try {
-  //     const swoots = await SwootModel.findById(_id);
-  //     console.log
-  //     res.status(200).send({ swoots: swoots });
-  //   } catch (error) {
-  //     return res.status(500).send({
-  //       message: "Something failed when trying to get post",
-  //       data: error.message,
-  //     });
-  //   }
-  // }
+  static async GetAllAnswers(req, res) {
+    const { id }  = req.params;
+
+    const swoots = await SwootModel.find({isAnswer: id});
+    console.log(swoots)
+
+    try {
+      
+      res.status(200).send({ swoots: swoots });
+    } catch (error) {
+      return res.status(500).send({
+        message: "Something failed when trying to get all posts",
+        data: error.message,
+      });
+    }
+  }
+
+  static async GetSwootById(req, res) {
+    const {id} = req.params
+
+    try {
+      const swoot = await SwootModel.findById(id);
+      res.status(200).send({ swoot: swoot });
+    } catch (error) {
+      return res.status(500).send({ message: "Something failed when trying to get post",data: error.message });
+    }
+  }
+
+  static async getSwootsByUserId(req, res) {
+    const userid = req.params.id;
+
+    try {
+      const user = await UserModel.findById(userid);
+      const swoots = await SwootModel.find({ user: user, isAnswer: {$exists: false} })
+      return res.status(200).send({ swoots: swoots })
+    } catch (error) {
+      return res.status(500).send({ message: "Something failed when trying to get all the swoots",data: error.message });
+    }
+  }
+
+  static async getAnswersByUserId(req, res) {
+    const userid = req.params.id;
+
+    try {
+      const user = await UserModel.findById(userid);
+      const swoots = await SwootModel.find({ user: user, isAnswer: {$exists: true} })
+      return res.status(200).send({ swoots: swoots })
+    } catch (error) {
+      return res.status(500).send({ message: "Something failed when trying to get all the swoots",data: error.message });
+    }
+  }
 
   static async Delete(req, res) {
       var decrypted = Decrypt(req.body.jsonCrypt);

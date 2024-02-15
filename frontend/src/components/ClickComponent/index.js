@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import perfil from "../NavBarDentro/img/perfil5.png";
-import { Link } from "react-router-dom"; // Importe o Link do react-router-dom
+import { Link, useParams } from "react-router-dom"; // Importe o Link do react-router-dom
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 
@@ -16,41 +16,40 @@ import { BiLike, BiSolidLike, BiCommentDetail } from "react-icons/bi";
 import { jwtDecode } from "jwt-decode";
 
 export default function ClickComponent() {
+  const [ text, setText ] = useState('');
   const { setMessage, setShow, setVariant } = useContext(AlertaContext);
-  const [swootData, setSwootData] = useState([]);
+  const [ swootData, setSwootData] = useState([]);
+  const [ currentSwoot, setCurrentSwoot] = useState({})
+  let { id } = useParams();
 
-  function ShowLike({ likes }) {
-    var userid = jwtDecode(sessionStorage.getItem("token"));
-    let curtido = false;
-
-    if (likes && likes.likes) {
-      likes.likes.map((like) => {
-        if (like.user._id == userid.userid) curtido = true;
-      });
+  async function getCurrentSwoot() {
+    try {
+      const response = await axios.get('http://localhost:8080/swoot/get/' + id);
+      return response.data.swoot;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return {};
     }
-    if (curtido)
-      return (
-        <BiSolidLike
-          className={styles.interactionButtons}
-          style={{ color: "#f31c68" }}
-        />
-      );
-
-    return (
-      <BiLike
-        className={styles.interactionButtons}
-        style={{ color: "#f31c68" }}
-      />
-    );
   }
 
-  async function getRespostas(id){
-    try {
-      const res = await axios.get(`http://localhost:8080/resposta/get-all/${id}`)
-      console.log(res.data)
-    } catch (error) {
-      
+  useEffect(() => {
+    async function fetchData() {
+      const swootdata = await getCurrentSwoot();
+      setCurrentSwoot(swootdata);
     }
+
+    fetchData();
+  }, [id]);
+
+  function ShowLike(likes) {
+    var token = sessionStorage.getItem('token');
+    const jwt = jwtDecode(token);
+
+    const searchIndex = likes.likes.findIndex(user => user._id == jwt.userid);
+    if (searchIndex != -1)
+      return <BiSolidLike className={styles.interactionButtons} style={{ color: '#f31c68' }} />
+
+    return <BiLike className={styles.interactionButtons} style={{ color: '#f31c68' }} />
   }
 
   async function likeSwoot(swootid) {
@@ -71,9 +70,7 @@ export default function ClickComponent() {
 
   async function getSwoots() {
     try {
-      const res = await axios.get("http://localhost:8080/swoot/get-all");
-      console.log(res.data)
-      
+      const res = await axios.get("http://localhost:8080/swoot/get-all-answers/" + id);
       setSwootData(res.data.swoots);
       return res.data.swoots;
     } catch (error) {
@@ -83,34 +80,29 @@ export default function ClickComponent() {
     }
   }
 
-  async function getLikes(swootid) {
+  async function setSwoots() {
+    const swoots = await getSwoots();
+    setSwootData(swoots);
+  }
+
+  useEffect(() => {
+    setSwoots();
+  }, []);
+
+  async function answerSwoot(id) {
+    const token = sessionStorage.getItem('token');
+
     try {
-      const res = await axios.get(
-        "http://localhost:8080/likes/get-all/" + swootid
-      );
-      return res.data.likes;
+      const res = await axios.post("http://localhost:8080/swoot", {
+        token: token, text: text, isAnswer: id
+      });
+      setSwoots()
     } catch (error) {
       setMessage(error);
       setShow(true);
       setVariant("danger");
     }
   }
-
-  async function setSwoots() {
-    const swoots = await getSwoots();
-    getSwoots(swoots[0]._id)
-    const swootsWithLikes = await Promise.all(
-      swoots.map(async (swoot) => {
-        const likes = await getLikes(swoot._id);
-        return { ...swoot, likes };
-      })
-    );
-    setSwootData(swootsWithLikes);
-  }
-
-  useEffect(() => {
-    setSwoots();
-  }, []);
 
   return (
     <>
@@ -121,95 +113,80 @@ export default function ClickComponent() {
               <Container className={`${styles.Container} ${styles.marginRight}`}>
                 <Row className={styles.row}>
                   <Col xs={4} md={3} className={styles.imagem}>
-                    <Image className={styles.img} src={perfil} roundedCircle />
+                    <Image className={styles.actualimg} src={perfil} roundedCircle />
                     <Col className={styles.date}>
                       <div>
-                        <p className={styles.name}>fulano</p>
-                        <p className={styles.hide}>@fulano</p>
+                        <p className={styles.name}>{currentSwoot.user?.name}</p>
+                        <p className={styles.hide}>@{currentSwoot.user?.username}</p>
                       </div>
                     </Col>
                   </Col>
                   <Col className={styles.texto}>
-                    <p>fulano</p>
+                    <p>{currentSwoot.text}</p>
                   </Col>
-                  <Stack direction="horizontal" gap={3}>
+                  <Stack direction="vertical" gap={3}>
                     <Form.Control
-                      className="me-auto"
-                      placeholder="Adicione seu comentario"
+                      as="textarea"
+                      style={{ height: 140 }}
+                      maxLength={255}
+                      className={styles.inp}
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                      aria-describedby="swootHelpBlock"
+                      placeholder="O que deseja dizer?"
                     />
-
-                    <Button className={styles.bt} variant="outline-secondary">
-                      Swootar
+                    <Button className={styles.form__button} onClick={() => answerSwoot(id)}>
+                      Swoot
                     </Button>
                   </Stack>
                 </Row>
               </Container>
             </div>
             <div>
-              {swootData.slice(0).map((swoot) => {
-                return (
-                  <Container
-                    className={`${styles.Container} ${styles.marginRight}`}
-                    key={swoot._id}
-                  >
-                    <Row className={styles.row}>
-                      <Col xs={4} md={3} className={styles.imagem}>
-                        <Image
-                          className={styles.img}
-                          src={perfil}
-                          roundedCircle
-                        />
-                        <Col className={styles.date}>
-                          <div>
-                            <p className={styles.name}>{swoot.user.name}</p>
-                            <p className={styles.hide}>@{swoot.user.username}</p>
-                          </div>
-                          <p className={styles.hide}>
-                            {new Date(swoot.createdAt).toUTCString().slice(5, 16)}
-                          </p>
-                        </Col>
+              {swootData?.slice(0).reverse().map((swoot) => (
+                <Container className={styles.Container} key={swoot._id}>
+                  <Row className={styles.row}>
+                    <Col xs={4} md={3} className={styles.imagem}>
+                      <Link className={styles.link} to={'/perfil/' + swoot.user._id} replace>
+                        <Image className={styles.img} src={perfil} roundedCircle />
+                      </Link>
+                      <Col className={styles.date}>
+                        <div>
+                          <p className={styles.name}>{swoot.user.name}</p>
+                          <p className={styles.hide}>@{swoot.user.username}</p>
+                        </div>
+                        <p className={styles.hide}>
+                          {new Date(swoot.createdAt).toUTCString().slice(5, 16)}
+                        </p>
                       </Col>
-                      <Col className={styles.texto}>
-                        <p>{swoot.text}</p>
-                      </Col>
-                      <Card.Footer className={styles.footer}>
-                        <Button
-                          variant="link"
-                          style={{ textDecoration: "none" }}
-                          onClick={() => likeSwoot(swoot._id)}
-                        >
-                          <div style={{ display: "flex" }}>
-                            <ShowLike likes={swoot} />
-                            <div
-                              className={styles.hide}
-                              style={{ margin: "0 0 0 10px" }}
-                            >
-                              {swoot.likes?.length}
-                            </div>
-                          </div>
-                        </Button>
-                        <Button
-                          variant="link"
-                          style={{ textDecoration: "none" }}
-                        >
-                          <div style={{ display: "flex" }}>
-                            <BiCommentDetail
-                              className={styles.interactionButtons}
-                              style={{ color: "#f31c68" }}
-                            />
-                            <div
-                              className={styles.hide}
-                              style={{ margin: "0 0 0 10px" }}
-                            >
-                              0{}
-                            </div>
-                          </div>
-                        </Button>
-                      </Card.Footer>
-                    </Row>
-                  </Container>
-                );
-              })}
+                    </Col>
+                    <Col className={styles.texto}>
+                      <p>{swoot.text}</p>
+                    </Col>
+                    <Card.Footer className={styles.footer}>
+                      <Button
+                        variant="link"
+                        style={{ textDecoration: "none" }}
+                        onClick={() => likeSwoot(swoot._id)}
+                      >
+                        <div style={{ display: "flex" }}>
+                          <ShowLike likes={swoot.likes} />
+                          <div className={styles.hide} style={{ margin: "0 0 0 10px" }}>{swoot.likes?.length}</div>
+                        </div>
+                      </Button>
+                      <Link
+                        to={`/ClickSweet/${swoot._id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div style={{ display: "flex" }}>
+                          <BiCommentDetail className={styles.interactionButtons} style={{ color: '#f31c68' }} />
+                          <div className={styles.hide} style={{ margin: "0 0 0 10px" }}>0{ }</div>
+                        </div>
+                      </Link>
+                    </Card.Footer>
+                  </Row>
+                </Container>
+              ))}
             </div>
           </div>
         </Row>

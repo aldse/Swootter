@@ -18,8 +18,6 @@
     border: none !important;
     background-color: #2C2C2C !important;
     display: flex;
-    justify-content: center !important;
-    align-items: center;
 }
 
 .modal{
@@ -31,7 +29,6 @@
     color: #2C2C2C !important;
 }
 
-
 .form__button {
     font-size: 1.1rem;
     font-weight: 500;
@@ -40,14 +37,13 @@
     justify-content: center;
     border: none;
     border-radius: 5px;
-    width: 200px;
+    width: 100%;
     height: 6vh;
     text-decoration: none;
     color: #2C2C2C;
     border: 2px solid #2C2C2C;
     background-color: white;
     transition: 0.5s;
-    margin: 0 0 20px 0 !important;
 }
 
 .form__button:hover {
@@ -63,3 +59,6 @@
     font-size: 2.5rem !important;
 }
 
+.inp {
+    resize: none;
+}

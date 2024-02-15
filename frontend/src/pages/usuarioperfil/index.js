@@ -2,7 +2,6 @@ import { Col, Row } from "react-bootstrap";
 import styles from "./styles.module.scss";
 import UsuarioPerfilComponent from "../../components/UsuarioPerfilComponent";
 import AlertaComponent from "../../components/AlertaComponent";
-import NavBarDentro from "../../components/NavBarDentro";
 import { useState } from "react";
 import Sweets from "../../components/Sweets";
 import Likes from "../../components/Likes";

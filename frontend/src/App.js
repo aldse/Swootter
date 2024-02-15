@@ -8,13 +8,9 @@ import RotaProtegida from "./pages/RotaProtegida";
 import AcessoRestrito from "./pages/AcessoRestrito";
 import UsuarioFeed from "./pages/UsuarioFeed";
 import UsuarioPerfil from "./pages/usuarioperfil";
-<<<<<<< HEAD
-import Trends from "./pages/trends";
 import ClickSweet from "./pages/ClickSweet";
-=======
 import SwootTops from "./pages/SwootTops";
 
->>>>>>> 02cf022ba506b83365344430cfa82cc0106a14d1
 function App() {
   return (
     <>
@@ -28,7 +24,7 @@ function App() {
           <Route path="/" element={<RotaProtegida errorPage={<AcessoRestrito />} targetPage={<NavBarDentro />} />}>
             <Route path="feed" element={<UsuarioFeed />} />
             <Route path="tops" element={<SwootTops/>} />
-            <Route path="perfil/:idUsuario" element={<UsuarioPerfil />} />
+            <Route path="perfil/:userid" element={<UsuarioPerfil />} />
             {/* <Route path="trends" element={<Trends />} /> */}
             <Route path="ClickSweet/:id" element={<ClickSweet />} />
           </Route>

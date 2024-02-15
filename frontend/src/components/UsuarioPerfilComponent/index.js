@@ -1,19 +1,41 @@
+import { useParams } from "react-router-dom";
 import perfil from "./img/perfil2.png";
 import styles from "./styles.module.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function UsuarioPerfilComponent({setCards}) {
+export default function UsuarioPerfilComponent({ setCards }) {
+  const [user, setUser] = useState({})
+  let { userid } = useParams();
+
+  async function getUser() {
+    try {
+      const response = await axios.get('http://localhost:8080/user/get/' + userid);
+      return response.data.user;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return {};
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const userdata = await getUser();
+      setUser(userdata);
+    }
+
+    fetchData();
+  }, [userid]);
+
   const handleSweetsClick = () => {
-    console.log("Sweets clicado!");
     setCards(0);
   };
 
   const handleRespostasClick = () => {
-    console.log("Respostas clicado!");
     setCards(1);
   };
 
   const handleLikesClick = () => {
-    console.log("Likes clicado!");
     setCards(2);
   };
 
@@ -30,13 +52,11 @@ export default function UsuarioPerfilComponent({setCards}) {
           />
         </div>
         <div className={styles.funca}>
-          <p className={styles.bio}>Fulano de Tal</p>
-          <p className={styles.name}>@Fulano</p>
-          <p>Bio Bio Bio Bio Bio Bio Bio Bio</p>
-          <p>09/02/2024</p>
+          <p className={styles.bio}>{user?.name}</p>
+          <p className={styles.name}>@{user?.username}</p>
+          <p>{new Date(user?.birthdate).toUTCString().slice(5, 16)}</p>
         </div>
       </div>
-      {/* <hr className={styles.hr}/> */}
       <div className={styles.botoes}>
         <p className={styles.p} onClick={handleSweetsClick}>
           Sweets
